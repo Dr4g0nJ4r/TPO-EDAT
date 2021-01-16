@@ -31,30 +31,77 @@ public class Pila{
         }
         return res;
     }
-
+    /**Devuelve el elemento contenido en la Tope de la Pila. Precondición: la Pila no es vacía*/
     public Object obtenerTope()
     {
+        return this.tope.getElem();
     }
-
+    /**Devuelve true si la Pila no contiene elementos, false en caso de tener uno o más elementos */
     public boolean esVacia()
     {
-
+        boolean res = false;
+        if(this.tope == null)
+        {
+            res = true;
+        }
+        return res;
     }
-
+    /**Vacía la Pila de todos sus elementos. Retorna void. */
     public void vaciar()
     {
-
+        while(!this.esVacia())
+        {
+            this.tope = this.tope.getEnlace();
+        }
     }
+    /**Clona la Pila invocada. Retorna una instancia Pila con los mismos elementos y orden de la Pila que invoca al método. */
     @Override
     public Pila clone()
     {
-
+        Pila nuevaPila = new Pila();
+        if(!this.esVacia())
+        {
+            this.recorrerRecursivamente(nuevaPila, this.tope);
+        }
+        return nuevaPila;
     }
-
+    /**Retorna un String con los elementos presentes en la Pila */
     @Override
     public String toString()
     {
-
+        String pilaString = "";
+        if(this.esVacia())
+        {
+            pilaString += "La Pila está vacía"; 
+        }else{
+            Nodo nodoIterable = this.tope;
+            while(nodoIterable != null){
+                if(nodoIterable == this.tope)
+                {
+                    pilaString += "\n | " + nodoIterable.getElem().toString() + " |<-- TOPE";
+                }else{
+                    pilaString += "\n" + nodoIterable.getElem().toString();
+                }
+                nodoIterable = nodoIterable.getEnlace();
+            }
+            pilaString += "|_____________________________| <-- Base de la Pila";
+        }
+        return pilaString;
+    }
+    /**Recorre la Pila de forma recursiva, desde el tope de la Pila hasta alcanzar el primer elemento ingresado en la Pila (caso base). Desde el caso base, y en el retorno de la recursividad, se van agregando los elementos a la instancia Pila pasada por parámetros. Se utiliza en el método público clone() */
+    private void recorrerRecursivamente(Pila pila, Nodo nodo)
+    {
+        //caso base
+        if(nodo.getEnlace() == null)
+        {
+            pila.apilar(nodo.getElem());
+        }
+        //caso iterativo
+        else
+        {
+            this.recorrerRecursivamente(pila, nodo.getEnlace());
+            pila.apilar(nodo.getElem());
+        }
     }
 }
 
