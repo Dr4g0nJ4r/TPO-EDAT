@@ -69,6 +69,8 @@ public class Pila{
     @Override
     public String toString()
     {
+        int anchoLinea = 30;
+        int stringMasLargo = 0;
         String pilaString = "";
         if(this.esVacia())
         {
@@ -78,13 +80,17 @@ public class Pila{
             while(nodoIterable != null){
                 if(nodoIterable == this.tope)
                 {
-                    pilaString += "\n | " + nodoIterable.getElem().toString() + " |<-- TOPE";
+                    pilaString += "\n |" + nodoIterable.getElem().toString() + " ".repeat(anchoLinea - nodoIterable.getElem().toString().length())+"|<-- TOPE";
                 }else{
-                    pilaString += "\n" + nodoIterable.getElem().toString();
+                    pilaString += "\n |" + nodoIterable.getElem().toString() + " ".repeat(anchoLinea - nodoIterable.getElem().toString().length()) + "|";
+                }
+                if(nodoIterable.getElem().toString().length() > stringMasLargo)
+                {
+                    stringMasLargo = nodoIterable.getElem().toString().length();
                 }
                 nodoIterable = nodoIterable.getEnlace();
             }
-            pilaString += "|_____________________________| <-- Base de la Pila";
+            pilaString += "<-- Base de la Pila";
         }
         return pilaString;
     }
