@@ -58,7 +58,13 @@ public class Lista {
             }
             else
             {
-                nodoAux.setEnlace(nodoAux.getEnlace().getEnlace());
+                if(pos == 1)
+                {
+                    this.cabecera = this.cabecera.getEnlace();
+                }else{
+                    nodoAux.setEnlace(nodoAux.getEnlace().getEnlace());
+                }
+                
             }
         }
         return exito;
@@ -83,7 +89,7 @@ public class Lista {
     public int localizar(Object elem){
         int pos = 1;
         Nodo nodoAux = this.cabecera;
-        while(nodoAux != null && pos <= this.longitud()+1)
+        while(nodoAux != null && pos <= this.longitud())
         {
             if(elem.equals(nodoAux.getElem()))
             {
@@ -95,7 +101,7 @@ public class Lista {
                 pos++;
             }     
         }
-        if(pos == this.longitud())
+        if(pos > this.longitud())
         {
             pos = -1;
         }
