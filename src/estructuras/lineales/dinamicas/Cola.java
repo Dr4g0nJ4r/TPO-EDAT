@@ -26,7 +26,8 @@ public class Cola {
             this.frente = nuevoElemento;
             this.posterior = nuevoElemento;
         }else{
-            nuevoElemento = new Nodo(elem, this.posterior);
+            nuevoElemento = new Nodo(elem, null);
+            this.posterior.setEnlace(nuevoElemento);
             this.posterior = nuevoElemento;
         }
         return true;
@@ -41,7 +42,7 @@ public class Cola {
             this.frente = this.frente.getEnlace();
             res = true;
             //Si está vacia, posterior = null
-            if(this.esVacia())
+            if(this.frente == null)
             {
                 this.posterior = null;
             }
@@ -101,7 +102,7 @@ public class Cola {
             Nodo iter = this.frente;
             while(iter != null)
             {
-                res += iter.getElem().toString();
+                res += iter.getElem().toString() + " / ";
                 iter = iter.getEnlace();
             }
             res += "    <-  (Final)";
