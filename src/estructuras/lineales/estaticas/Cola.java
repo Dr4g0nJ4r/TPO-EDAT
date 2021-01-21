@@ -28,10 +28,16 @@ public class Cola {
         {
             res = false; 
         }else{
+            if(this.esVacia())
+            {
+                this.frente =0;
+                this.posterior=0;
+            }
             this.arreglo[this.posterior] = elem;
             this.posterior++;
             this.posterior%=TAM;
             res = true;
+            
         }
         return res;
     }
@@ -65,7 +71,7 @@ public class Cola {
         }
         return res;
     }
-    
+
     /**Vacía la Cola. Retorna void*/
     public void vaciar()
     {
@@ -101,6 +107,8 @@ public class Cola {
             while(iter != this.posterior)
             {
                 res += this.arreglo[iter].toString() + "    ";
+                iter++;
+                iter%=TAM;
             }
             res+= "     <- (Final)";
         }
