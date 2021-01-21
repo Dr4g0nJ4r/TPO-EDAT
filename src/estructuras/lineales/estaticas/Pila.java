@@ -1,7 +1,5 @@
 package estructuras.lineales.estaticas;
 
-import java.util.ArrayList;
-
 /**Implementación dinámica del TDA Pila 
  *  - Estructura lineal de tipo LIFO (Last In, First Out)
  *  - Acceso solo al tope
