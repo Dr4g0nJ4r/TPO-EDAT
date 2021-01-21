@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import estructuras.lineales.dinamicas.Pila;
-
+//import estructuras.lineales.dinamicas.Pila;
+import estructuras.lineales.estaticas.Pila;
 public class testPila {
     /**Método main de la clase TestPila. Levanta por defecto un lote de prueba y genera el menú */
+    private static Scanner scanner;
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         Pila pila = new Pila();
         Pila pila2 = new Pila();
         preCargarDatos(pila);
@@ -31,7 +33,7 @@ public class testPila {
                 //agrega un elemento a la Pila
                     System.out.print("Ingrese un nuevo nombre y apellido: ");
                     String nuevoElem = scanner.nextLine();
-                    arrayPilas.get(indexPilaActual).apilar(nuevoElem);
+                    System.out.println("Se apiló el elemento? -> " + arrayPilas.get(indexPilaActual).apilar(nuevoElem));
                     break;
                 case 2:
                 //Obtiene el elemento tope de la pila.
@@ -46,7 +48,7 @@ public class testPila {
                 //retira el elemento tope de la pila
                     if(!arrayPilas.get(indexPilaActual).esVacia())
                     {
-                        arrayPilas.get(indexPilaActual).desapilar();
+                        System.out.println("Se retiró el elemento? -> " + arrayPilas.get(indexPilaActual).desapilar());
                     }
                     break;
                 case 4:
@@ -67,6 +69,9 @@ public class testPila {
                     indexPilaActual = (indexPilaActual + 1) % arrayPilas.size();
                     System.out.println("Posición actual -> " + indexPilaActual);
                     break;
+                case 8:
+                //Vacía la Pila
+                    arrayPilas.get(indexPilaActual).vaciar();
                 case 0:
                 //Cierre del programa
                     System.out.println("Fin del Programa");
@@ -77,6 +82,7 @@ public class testPila {
                     break;
             }
         }while(opcionElegida != 0);
+        scanner.close();
     }
 
     // Método con ingreso del dato de la opción del menú
@@ -90,9 +96,9 @@ public class testPila {
         opciones += "5. Clonar pila \n";
         opciones += "6. Ver Pila \n";
         opciones += "7. Cambiar de Pila \n";
+        opciones += "8. Vaciar pila\n";
         opciones += "0. Cerrar programa \n";
         System.out.println(opciones);
-        Scanner scanner = new Scanner(System.in);
         opcion = (int) scanner.nextInt();
         return opcion;
     }
