@@ -65,7 +65,7 @@ public class Cola {
         }
         return res;
     }
-
+    
     /**Vacía la Cola. Retorna void*/
     public void vaciar()
     {
