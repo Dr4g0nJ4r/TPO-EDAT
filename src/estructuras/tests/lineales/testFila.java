@@ -1,4 +1,4 @@
-package estructuras.tests;
+package estructuras.tests.lineales;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
