@@ -10,7 +10,7 @@ public class ArbolBinario {
     }
 
     /**Dado un elemento elemNuevo y un elemento elemPadre, inserta elemNuevo como hijo izquierdo o derecho de la primer aparición de elemPadre, según lo indique el parámetro posicion. Para que la operación termine con éxito debe existir un nodo en el árbol con elemento = elemPadre y ese nodo debe tener libre su hijo posición. Si se puede realizar la inserción devuelve true, en caso contrario devuelve false */
-    public insertar(Object elemNuevo, Object elemPadre, char posicion)
+    public boolean insertar(Object elemNuevo, Object elemPadre, char posicion)
     {
 
     }

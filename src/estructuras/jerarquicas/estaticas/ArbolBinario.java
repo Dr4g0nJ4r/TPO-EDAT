@@ -1,5 +1,6 @@
 package estructuras.jerarquicas.estaticas;
 import estructuras.lineales.dinamicas.Lista;
+import estructuras.lineales.dinamicas.Cola;
 /**Árbol binario
  * Estructura que permite organizar un conunto de datos de forma jerárquica.
  * La particularidad de este árbol es que cada nodo puede tener como máximo 2 hijos.
@@ -11,18 +12,55 @@ public class ArbolBinario {
 
     /**Crea un árbol binario vacío */
     public ArbolBinario(){
-
+        this.arbol = new CeldaBin[TAM];
+        this.raiz = -1;
     }
 
     /**Dado un elemento elemNuevo y un elemento elemPadre, inserta elemNuevo como hijo izquierdo o derecho de la primer aparición de elemPadre, según lo indique el parámetro posicion. Para que la operación termine con éxito debe existir un nodo en el árbol con elemento = elemPadre y ese nodo debe tener libre su hijo posición. Si se puede realizar la inserción devuelve true, en caso contrario devuelve false */
-    public insertar(Object elemNuevo, Object elemPadre, char posicion)
+    public boolean insertar(Object elemNuevo, Object elemPadre, char posicion)
     {
+        boolean res = true;
+        //Si el árbol está vació, lo inserta como raíz. Sino, busca al Padre para insertarlo
+        if(this.esVacio())
+        {
+            this.raiz = 0;
+            this.arbol[0].setElem(elemNuevo);
+        }else{
+            int posicionPadre = this.raiz;
+            Cola celdas = new Cola();
+            celdas.poner(arbol[this.raiz]);
+            boolean seEncontro = false;
+            while(res && !seEncontro && !celdas.esVacia())
+            {
+                CeldaBin celda = (CeldaBin) celdas.obtenerFrente();
+                if(celda.getElem().equals(elemPadre))
+                {
+                    if(posicion == 'I')
+                    {
+                        if(this.arbol[celda.getIzquierdo()].isEnUso())
+                        {
+                            res = false;
+                        }else{
+                            seEncontro = true;
+                            this.arbol[celda.getIzquierdo()] = new CeldaBin(elemNuevo);
+                            celda.setIzquierdo(celda.getIzquierdo());
+                        }
+                    }else{
 
+                    }
+                }
+            }
+        }
     }
 
     /**Devuelve false si hay al menos un elemento cargado en el árbol y verdadero en caso contrario */
     public boolean esVacio(){
-
+        boolean res = false;
+        if(this.raiz == -1)
+        {
+            res = true;
+        }
+        return res;
     }
 
     /**Devuelve la altura del árbol, es decir la longitud del camino más largo desde la raíz hasta una hoja (un árbol vacío tiene nivel -1) */
@@ -80,5 +118,42 @@ public class ArbolBinario {
     @Override
     public String toString(){
 
+    }
+
+    /**
+     * Busca la próxima posición libre dentro del arreglo del árbol
+     * @return Int con la próxima posición libre. Si el arreglo está lleno, retorna -1 
+     * */
+    private int posicionLibre(){
+        int libre = -1;
+        int iter = 0;
+        while(libre != -1 && iter < this.arbol.length)
+        {
+            if(!this.arbol[iter].isEnUso())
+            {
+                libre = iter;
+            }else{
+                iter++;
+            }
+            
+        }
+        return libre;
+    }
+
+    /**Comprueba que el arreglo árbol esté lleno. True si es así, false sino */
+    private boolean estaLlena(){
+        boolean lleno = true;
+        int iter = 0;
+        while(lleno && iter < this.arbol.length)
+        {
+            if(!this.arbol[iter].isEnUso())
+            {
+                lleno = false;
+            }else{
+                iter++;
+            }
+            
+        }
+        return lleno;
     }
 }

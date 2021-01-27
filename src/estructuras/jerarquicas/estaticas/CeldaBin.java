@@ -14,13 +14,26 @@ public class CeldaBin {
         this.enUso = false;
         this.elem = null;
     }
-    
+
+    public CeldaBin(Object elemento)
+    {
+        this.elem = elemento;
+        this.enUso = true;
+        this.derecho = -1;
+        this.izquierdo = -1;
+    }
+
     public Object getElem() {
         return this.elem;
     }
 
     public void setElem(Object elem) {
         this.elem = elem;
+        if(this.elem != null)
+        {
+            this.setEnUso(true);
+        }
+        
     }
 
     public int getIzquierdo() {
