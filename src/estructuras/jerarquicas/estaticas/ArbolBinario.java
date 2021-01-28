@@ -42,13 +42,33 @@ public class ArbolBinario {
                             res = false;
                         }else{
                             seEncontro = true;
-                            this.arbol[celda.getIzquierdo()] = new CeldaBin(elemNuevo);
+                            this.arbol[celda.getIzquierdo()].setElem(elemNuevo);
                             celda.setIzquierdo(celda.getIzquierdo());
                         }
                     }else{
-
+                        if(posicion == 'D')
+                        {
+                            if(this.arbol[celda.getDerecho()].isEnUso())
+                        {
+                            res = false;
+                        }else{
+                            seEncontro = true;
+                            this.arbol[celda.getDerecho()].setElem(elemNuevo);
+                            celda.setDerecho(celda.getDerecho());
+                        }
+                        }
+                    }
+                }else{
+                    if(celda.getIzquierdo() > 0)
+                    {
+                        celdas.poner(this.arbol[celda.getIzquierdo()]);
+                    }
+                    if(celda.getDerecho() > 0)
+                    {
+                        celdas.poner(this.arbol[celda.getDerecho()]);
                     }
                 }
+                celdas.sacar();
             }
         }
     }
@@ -65,13 +85,50 @@ public class ArbolBinario {
 
     /**Devuelve la altura del árbol, es decir la longitud del camino más largo desde la raíz hasta una hoja (un árbol vacío tiene nivel -1) */
     public int altura(){
+        int altura;
+        if(this.esVacio())
+        {
+            altura = -1;
+        }else{
+            altura = this.alturaAuxRecursivo(this.arbol[this.raiz]);
+        }
+        return altura;
+    }
 
+    //Método privado que recorre recursivamente el arreglo.
+    private int alturaAuxRecursivo(CeldaBin celda){
+        int alt = 0;
+        //caso base
+        if(celda.getDerecho() == -1 || celda.getIzquierdo() == -1)
+        {
+            alt = 0;
+        }
+        else
+        {
+            int alturaDerecha = 0; 
+            int alturaIzquierda = 0;
+            if(celda.getDerecho() != -1)
+            {
+                alturaDerecha = 1 + alturaAuxRecursivo(this.arbol[celda.getDerecho()]);
+            }
+            if(celda.getIzquierdo() != -1)
+            {
+                alturaIzquierda = 1 + alturaAuxRecursivo(this.arbol[celda.getIzquierdo()]);
+            }
+            if(alturaDerecha > alturaIzquierda)
+            {
+                alt = alturaDerecha;
+            }else{
+                alt = alturaIzquierda;
+            }
+        }
+        return alt;
     }
 
     /**Devuelve el nivel de un elemento en el árbol. Si el elemento no existe en el árbol, retorna -1 */
     public int nivel(Object elemento)
     {
-
+        
     }
 
     /**Dado un elemento devuelve el valor almacenado en su nodo padre (busca la primer aparición de elemento) */
