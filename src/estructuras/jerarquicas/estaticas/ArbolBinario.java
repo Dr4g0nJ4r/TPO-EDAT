@@ -128,13 +128,50 @@ public class ArbolBinario {
     /**Devuelve el nivel de un elemento en el árbol. Si el elemento no existe en el árbol, retorna -1 */
     public int nivel(Object elemento)
     {
-        
+        int nivel;
+        if(this.esVacio())
+        {
+            nivel = -1;
+        }else{
+            nivel = nivelRecursivo(elemento, this.raiz, false); 
+        }
+        return nivel;   
     }
 
+    private int nivelRecursivo(Object elem, int pos, boolean encontrado)
+    {
+        int nivel = 0;
+        //caso base, encontrar elemento
+        if(!encontrado && this.arbol[pos].equals(elem))
+        {
+            nivel = 0;
+        }
+        else
+        {
+            //revisar hijo izquierdo
+            if(this.arbol[pos].getIzquierdo() != -1)
+            {
+                nivel = 1 + nivelRecursivo(elem, this.arbol[pos].getIzquierdo(), encontrado);
+            }
+            if(!encontrado && this.arbol[pos].getDerecho() != -1)
+            {
+                nivel = 1 + nivelRecursivo(elem, this.arbol[pos].getDerecho(), encontrado);
+            }  
+        }
+        return nivel;
+    }
     /**Dado un elemento devuelve el valor almacenado en su nodo padre (busca la primer aparición de elemento) */
     public Object padre(Object elemento)
     {
+        return padreRecursivo(elemento, this.raiz);
+    }
 
+    //Método recursivo auxiliar de padre(object elem)
+    private Object padreRecursivo(Object elemento, int pos)
+    {
+        Object padre = null;
+        //caso base
+        if(int alturaIzquierda)
     }
 
     /**Devuelve una lista con los elementos del árbol binario en el recorrido en preorden */
