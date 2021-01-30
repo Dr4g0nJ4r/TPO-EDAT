@@ -85,43 +85,34 @@ public class ArbolBinario {
     /**Devuelve el nivel de un elemento en el árbol. Si el elemento no existe en el árbol, retorna -1 */
     public int nivel(Object elemento)
     {
-        boolean esVacio;
-        int resultado = 0;
-        esVacio = this.nivelRecursivo(this.raiz, elemento, resultado);
-        if(!esVacio)
+        boolean encontrado = false;
+        int resultado = this.nivelRecursivo(this.raiz, elemento, encontrado);
+        if(!encontrado)
         {
             resultado = -1;            
         }
         return resultado;
     }
     
-    private boolean nivelRecursivo(NodoBin nodo, Object elemento, int resultado)
+    private int nivelRecursivo(NodoBin nodo, Object elemento, boolean encontrado)
     {
-        boolean res = false;
-        if(nodo != null)
+        int nivel = -1;
+        //Caso base
+        if(nodo != null && !encontrado)
         {
             if(nodo.getElemento().equals(elemento))
             {
-                res = true;
-            }
-            else
-            {
-                res = nivelRecursivo(nodo.getHijoIzquierdo(), elemento, resultado);
-                if(res)
+                nivel = 0;
+                encontrado = true;
+            }else{
+                nivel = 1 + this.nivelRecursivo(nodo.getHijoIzquierdo(), elemento, encontrado);
+                if(!encontrado)
                 {
-                    resultado++;
-                }
-                else
-                {
-                    res = nivelRecursivo(nodo.getHijoDerecho(), elemento, resultado);
-                    if(res)
-                    {
-                        resultado++;
-                    }
+                    nivel = 1 + this.nivelRecursivo(nodo.getHijoDerecho(), elemento, encontrado);
                 }
             }
         }
-        return res;
+        return nivel;
     }
 
     /**Dado un elemento devuelve el valor almacenado en su nodo padre (busca la primer aparición de elemento) */
@@ -296,17 +287,19 @@ public class ArbolBinario {
         if(nodo != null)
         {
             res += "Nodo " + nodo.getElemento().toString()+ " ";
+            res += "(";
             if(nodo.getHijoIzquierdo() != null)
             {
-                res += "HijoIzq -> " + nodo.getHijoIzquierdo().getElemento().toString() + " ";
+                res += nodo.getHijoIzquierdo().getElemento().toString() + "";
             }
+            res += "/";
             if(nodo.getHijoDerecho() != null)
             {
-                res += "HijoDer -> " + nodo.getHijoDerecho().getElemento().toString() + " ";
+                res += nodo.getHijoDerecho().getElemento().toString() + " ";
             }
-            res += "\n";
-            this.toStringAux(nodo.getHijoIzquierdo());
-            this.toStringAux(nodo.getHijoDerecho());
+            res += ")\n";
+            res += this.toStringAux(nodo.getHijoIzquierdo());
+            res += this.toStringAux(nodo.getHijoDerecho());
         }
         return res;
     } 
