@@ -318,7 +318,7 @@ public class ArbolBinario {
         //Caso Recursivo. (caso base si nodo == null)
         if(nodo != null)
         {
-            if(nodo.equals(elem))
+            if(nodo.getElemento().equals(elem))
             {
                 resultado = nodo;
             }else{
