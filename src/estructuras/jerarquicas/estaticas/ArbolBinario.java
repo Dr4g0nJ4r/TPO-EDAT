@@ -169,15 +169,47 @@ public class ArbolBinario {
     //Método recursivo auxiliar de padre(object elem)
     private Object padreRecursivo(Object elemento, int pos)
     {
-        Object padre = null;
+        Object padre;
         //caso base
-        if(int alturaIzquierda)
+        if(pos == -1)
+        {
+            padre = null;
+        }
+        //caso recursivo
+        else
+        {
+            //Reviso el subarbol izquierdo
+            if(this.arbol[pos].getIzquierdo() != -1 && this.arbol[pos].equals(elemento))
+            {
+                padre = this.arbol[pos];
+            }
+            else
+            {
+                padre = this.arbol[this.arbol[pos].getIzquierdo()];
+                if(padre == null)
+                {
+                    //Reviso el subarbol derecho
+                    if(this.arbol[pos].getDerecho() != -1 && this.arbol[pos].equals(elemento))
+                    {
+                        padre = this.arbol[pos];
+                    }
+                    else
+                    {
+                        padre = this.arbol[this.arbol[pos].getDerecho()];
+                    }
+                }
+                
+            }
+            
+            
+        }
+        return padre;
     }
 
     /**Devuelve una lista con los elementos del árbol binario en el recorrido en preorden */
     public Lista listarPreorden()
     {
-
+        
     } 
 
     /**Devuelve una lista con los elementos del árbol binario en el recorrido en inorden */

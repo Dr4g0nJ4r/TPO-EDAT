@@ -117,44 +117,28 @@ public class testArbolBin {
                 //Lista en PreOrden
                     System.out.println("PreOrden");
                     lista = arboles.get(posicionArbol).listarPreorden();
-                    while(!lista.esVacia())
-                    {
-                        System.out.print(lista.recuperar(1).toString() + " ");
-                        lista.eliminar(1);
-                    }
+                    System.out.println(lista.toString());
                     System.out.println("");
                     break;
                 case 10:
                 //Lista en InOrden
                     System.out.println("InOrden");
                     lista = arboles.get(posicionArbol).listarInorden();
-                    while(!lista.esVacia())
-                    {
-                        System.out.print(lista.recuperar(1).toString() + " ");
-                        lista.eliminar(1);
-                    }
+                    System.out.println(lista.toString());
                     System.out.println("");
                     break;
                 case 11:
                 //Lista en PosOrden
                     System.out.println("PosOrden");
                     lista = arboles.get(posicionArbol).listarPosorden();
-                    while(!lista.esVacia())
-                    {
-                        System.out.print(lista.recuperar(1).toString() + " ");
-                        lista.eliminar(1);
-                    }
+                    System.out.println(lista.toString());
                     System.out.println("");
                     break;
                 case 12:
                 //Listar en niveles
                     System.out.println("Por niveles");
                     lista = arboles.get(posicionArbol).listarNiveles();
-                    while(!lista.esVacia())
-                    {
-                        System.out.print(lista.recuperar(1).toString() + " ");
-                        lista.eliminar(1);
-                    }
+                    System.out.println(lista.toString());
                     System.out.println("");
                     break;
                 case 13:

@@ -85,34 +85,25 @@ public class ArbolBinario {
     /**Devuelve el nivel de un elemento en el árbol. Si el elemento no existe en el árbol, retorna -1 */
     public int nivel(Object elemento)
     {
-        boolean encontrado = false;
-        int resultado = this.nivelRecursivo(this.raiz, elemento, encontrado);
-        if(!encontrado)
-        {
-            resultado = -1;            
-        }
+        int resultado = nivelRecursivo(this.raiz, elemento, 0);
         return resultado;
     }
     
-    private int nivelRecursivo(NodoBin nodo, Object elemento, boolean encontrado)
+    private int nivelRecursivo(NodoBin nodo, Object elemento, int nivel)
     {
-        int nivel = -1;
+        int tempo = -1;
         //Caso base
-        if(nodo != null && !encontrado)
+        if(nodo != null)
         {
             if(nodo.getElemento().equals(elemento))
             {
-                nivel = 0;
-                encontrado = true;
+                tempo = nivel;
             }else{
-                nivel = 1 + this.nivelRecursivo(nodo.getHijoIzquierdo(), elemento, encontrado);
-                if(!encontrado)
-                {
-                    nivel = 1 + this.nivelRecursivo(nodo.getHijoDerecho(), elemento, encontrado);
-                }
+                tempo = nivelRecursivo(nodo.getHijoIzquierdo(), elemento, nivel+1);
+                tempo = nivelRecursivo(nodo.getHijoDerecho(), elemento, nivel+1);
             }
         }
-        return nivel;
+        return tempo;
     }
 
     /**Dado un elemento devuelve el valor almacenado en su nodo padre (busca la primer aparición de elemento) */
@@ -128,9 +119,9 @@ public class ArbolBinario {
         //Caso base nodo = null
         if(nodo != null)
         {
-            if(nodo.getHijoDerecho().getElemento().equals(elemento) || nodo.getHijoIzquierdo().getElemento().equals(elemento))
+            if(nodo.getHijoDerecho() != null && nodo.getHijoDerecho().getElemento().equals(elemento) || nodo.getHijoIzquierdo() != null && nodo.getHijoIzquierdo().getElemento().equals(elemento))
             {
-                padre = nodo;
+                padre = nodo.getElemento();
             }
             else
             {
@@ -235,10 +226,9 @@ public class ArbolBinario {
         ArbolBinario clon = new ArbolBinario();
         if(!this.esVacio())
         {
-            clon.insertar(this.raiz, this.raiz, 'D');
+            clon.insertar(this.raiz.getElemento(), this.raiz, 'D');
             this.cloneAux(this.raiz, clon);
         }
-        
         return clon;
     }
 
@@ -250,18 +240,18 @@ public class ArbolBinario {
         {
             if(nodo.getHijoIzquierdo() != null)
             {
-                arbolClon.insertar(nodo.getHijoIzquierdo(), nodo.getElemento(), 'I');
+                arbolClon.insertar(nodo.getHijoIzquierdo().getElemento(), nodo.getElemento(), 'I');
             }
             if(nodo.getHijoDerecho() != null)
             {
-                arbolClon.insertar(nodo.getHijoDerecho(), nodo.getElemento(), 'D');
+                arbolClon.insertar(nodo.getHijoDerecho().getElemento(), nodo.getElemento(), 'D');
             }
             this.cloneAux(nodo.getHijoIzquierdo(), arbolClon);
             this.cloneAux(nodo.getHijoDerecho(), arbolClon);
         }
     }
 
-    /**Quita todos los elementos de la estructura */
+    /**Quita todos los elementos <de la estructura */
     public void vaciar()
     {
         this.raiz = null;
