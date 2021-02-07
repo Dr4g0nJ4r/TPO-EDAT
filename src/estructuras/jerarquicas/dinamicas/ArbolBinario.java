@@ -89,6 +89,7 @@ public class ArbolBinario {
         return resultado;
     }
     
+    /**Método privado que retorna el nivel de un elemento dado */
     private int nivelRecursivo(NodoBin nodo, Object elemento, int nivel)
     {
         int tempo = -1;
