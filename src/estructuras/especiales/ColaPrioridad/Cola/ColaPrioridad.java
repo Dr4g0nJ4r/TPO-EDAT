@@ -1,5 +1,6 @@
-package estructuras.especiales;
+package estructuras.especiales.ColaPrioridad.Cola;
 
+import estructuras.lineales.dinamicas.Cola;
 
 public class ColaPrioridad {
     private NodoCP inicio;
@@ -28,7 +29,7 @@ public class ColaPrioridad {
         Object res = null;
         if(!this.esVacia())
         {
-            
+            Cola items = this.inicio.getItems();
         }
         return res;
     }
@@ -36,7 +37,10 @@ public class ColaPrioridad {
     public boolean esVacia()
     {
         boolean res = false;
-
+        if(this.inicio == null)
+        {
+            res = true;
+        }
         return res;
     }
 

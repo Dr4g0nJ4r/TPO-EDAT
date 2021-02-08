@@ -1,4 +1,4 @@
-package juego.jugador.categoria;
+package juego.equipo.categoria;
 
 public class Aficionado extends Categoria{
     static final int MULTIPLICADOR = 4;
