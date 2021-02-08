@@ -348,7 +348,12 @@ public class ArbolGenerico {
     public String toString()
     {
         String res = "";
-
+        if(this.esVacio())
+        {
+            res = "El árbol está vacío";
+        }else{
+            res = this.toStringAux(this.raiz);
+        }
         return res;
     }
 
